@@ -1,0 +1,13 @@
+{
+  "code": "thoughtco.ordereditor",
+  "name": "Order Editor",
+  "description": "Allow basic editing of order time and date, as well as addition of notes",
+  "version": "v1.0",
+  "author": "ryanmitchell",
+  "icon": {
+    "class": "fa fa-clipboard",
+    "backgroundColor": "#111",
+    "color": "#FFF"
+  },
+  "homepage": "https://github.com/thoughtco/ti-ext-ordereditor"
+}
