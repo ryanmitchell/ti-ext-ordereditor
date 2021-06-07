@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Thoughtco\OrderEditor;
 
@@ -20,20 +20,22 @@ class Extension extends BaseExtension
             if ($form->model instanceof Orders_model) {
 				$form->tabs['fields']['order_time']['disabled'] = FALSE;
 				$form->tabs['fields']['order_date']['disabled'] = FALSE;
-				
+
 				$form->tabs['fields']['notes'] = [
         			'tab' => 'lang:thoughtco.ordereditor::default.notes',
         			'label' => 'lang:thoughtco.ordereditor::default.order_notes',
 					'span' => 'left',
 		            'type' => 'textarea',
 				];
-				
-			    Event::listen('admin.toolbar.extendButtons', function (Toolbar $toolbar) {
-					$toolbar->buttons['save']['context'][] = 'edit';
-					$toolbar->buttons['saveClose']['context'][] = 'edit';
-				});						
+
 	        }
         });
+
+	    Event::listen('admin.toolbar.extendButtonsBefore', function (Toolbar &$toolbar) {
+            if ($toolbar->getController() instanceof \Admin\Controllers\Orders)
+			    $toolbar->buttons['save']['context'][] = 'edit';
+		});
+
     }
 }
 
