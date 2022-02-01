@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Thoughtco\OrderEditor;
 
@@ -18,24 +18,51 @@ class Extension extends BaseExtension
         // extend fields on orders model
         Event::listen('admin.form.extendFieldsBefore', function (Form $form) {
             if ($form->model instanceof Orders_model) {
-				$form->tabs['fields']['order_time']['disabled'] = FALSE;
-				$form->tabs['fields']['order_date']['disabled'] = FALSE;
-
+			$form->tabs['fields']['order_time_is_asap'] = [
+				'tab' => 'lang:thoughtco.ordereditor::default.edit_time_date',
+				'label' => 'lang:admin::lang.orders.label_time_is_asap',
+				'type' => 'switch',
+				'on' => 'lang:admin::lang.text_yes',
+				'off' => 'lang:admin::lang.text_no',
+				'context' => ['edit', 'preview'],
+			];	
+				
+			$form->tabs['fields']['order_time'] = [
+        		'tab' => 'lang:thoughtco.ordereditor::default.edit_time_date',
+        		'label' => 'lang:admin::lang.orders.label_order_time',
+				'type' => 'datepicker',
+				'mode' => 'time',
+				'span' => 'left',
+			];
+				
+			$form->tabs['fields']['order_date'] = [
+        		'tab' => 'lang:thoughtco.ordereditor::default.edit_time_date',
+        		'label' => 'lang:admin::lang.orders.label_order_date',
+            	'type' => 'datepicker',
+				'mode' => 'date',
+				'span' => 'right',
+			];
+			
+			$form->tabs['fields']['comment'] = [
+        		'tab' => 'lang:thoughtco.ordereditor::default.notes',
+        		'label' => 'lang:admin::lang.orders.label_comment',
+				'span' => 'left',
+            	'type' => 'textarea',
+			];	
 				$form->tabs['fields']['notes'] = [
         			'tab' => 'lang:thoughtco.ordereditor::default.notes',
         			'label' => 'lang:thoughtco.ordereditor::default.order_notes',
 					'span' => 'left',
 		            'type' => 'textarea',
 				];
-
-	        }
-        });
-
-	    Event::listen('admin.toolbar.extendButtonsBefore', function (Toolbar &$toolbar) {
+				
+				
+			     Event::listen('admin.toolbar.extendButtonsBefore', function (Toolbar &$toolbar) {
             if ($toolbar->getController() instanceof \Admin\Controllers\Orders)
 			    $toolbar->buttons['save']['context'][] = 'edit';
-		});
-
+				});						
+	        }
+        });
     }
 }
 
