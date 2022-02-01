@@ -2,6 +2,6 @@
 
 return [
     'notes' => 'Notes',
-    'edit_time_date' => 'Edit time/date',
+    'editor' => 'Edit order',
     'order_notes' => 'Internal notes',
 ];
